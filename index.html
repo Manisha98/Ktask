@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>K LoginForm</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+
+      <link rel="stylesheet" href="css/style.css">
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    $("#signup").click(function(){
+        var username = $("#name").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var conpassword = $("#conpassword").val();
+        function isValidEmailAddress(email) {
+            var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+            return pattern.test(email);
+        };
+       
+        if( !isValidEmailAddress(email))
+        {
+            alert("Enter a valid E-mail ID!!");
+        }
+       
+        else if((password.length)<8)
+        {
+            alert("password should be minimum 8 characters in length!!");
+        }
+        else if (password!== conpassword)
+        {
+            alert("Enter the same password!!");
+        }
+        else
+        {
+            var signupdetail = {
+                username : name,
+                email : email,
+                password : password
+            };
+            localStorage.setItem('signupdetail', JSON.stringify(signupdetail));
+            alert("Signup done successfully!Login to continue!");
+
+        }
+
+    });
+
+});
+    </script>
+<script type="text/javascript">
+	$(document).ready(function(){
+    $("#login").click(function () {
+
+       var valemail = $("#email1").val();
+       var valpassword = $("#password1").val();
+       var signupdetail= JSON.parse(localStorage.getItem('signupdetail'));
+       if(valemail=="" || valpassword== "")
+       {
+           alert("please enter the required details");
+       }
+       else if(valemail!== signupdetail.email)
+       {
+           alert("please enter the registered email ID");
+       }
+       else if(valpassword!== signupdetail.password)
+        {
+            alert("please enter the valid password");
+        }
+        else
+        {
+            alert("Login done successfully");
+        }
+
+
+    });
+});
+</script>
+
+  
+</head>
+
+<body background="bg1.jpg">
+  <form name="signup" method="post" action="#">
+  <div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="user" class="label">E-mail</label>
+					<input id="email1" type="email" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="password1" type="password" class="input" data-type="password">
+				</div>
+								<div class="group">
+					<input type="submit" class="button" id="login" value="Sign In">
+				</div>
+				<div class="hr"></div>
+				
+			</div>
+			
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="name" type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="password" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Re-enter Password</label>
+					<input id="conpassword" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email</label>
+					<input id="email" type="email" class="input">
+				</div>
+				<div class="group">
+					<input type="submit" id ="signup" class="button" value="Sign Up">
+				</div>
+				<div class="hr"></div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+  </form>
+  
+</body>
+</html>
